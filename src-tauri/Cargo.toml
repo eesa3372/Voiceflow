@@ -1,0 +1,43 @@
+[package]
+name = "voiceflow"
+version = "1.0.0"
+description = "VoiceFlow - Windows 11 Desktop Voice Dictation Engine"
+authors = ["VoiceFlow Team"]
+edition = "2021"
+default-run = "voiceflow"
+
+[build-dependencies]
+tauri-build = { version = "2.0.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0.0", features = ["tray-icon"] }
+tauri-plugin-shell = "2.0.0"
+tauri-plugin-global-shortcut = "2.0.0"
+tauri-plugin-autostart = "2.0.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.38", features = ["full"] }
+reqwest = { version = "0.12", features = ["json", "multipart"] }
+arboard = "3.4" # Safe cross-application clipboard manager for Windows 11 fallback
+cpal = "0.15"   # Native Windows WASAPI audio capture
+hound = "3.5"   # WAV encoding for speech chunks
+regex = "1.10"
+log = "0.4"
+env_logger = "0.11"
+base64 = "0.22"
+async-trait = "0.1"
+
+# Windows-specific API bindings for direct SendInput and active window focus tracking
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.58", features = [
+    "Win32_Foundation",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_System_DataExchange",
+    "Win32_Security",
+    "Win32_System_Threading",
+] }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

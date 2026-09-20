@@ -1,0 +1,10 @@
+{
+  "name": "VoiceFlow",
+  "description": "Windows 11 desktop voice dictation engine with global shortcut, technical vocabulary, and system-wide text injection.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
